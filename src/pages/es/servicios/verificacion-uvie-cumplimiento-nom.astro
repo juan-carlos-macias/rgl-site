@@ -1,0 +1,268 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { client } from '@lib/sanity/client';
+import { SITE_SETTINGS_QUERY } from '@lib/sanity/queries';
+
+const lang = 'es';
+const settings = await client.fetch(SITE_SETTINGS_QUERY);
+
+const pageTitle = 'Verificación UVIE y cumplimiento de normativa eléctrica | RLG Electrical';
+const pageDescription = 'Instalaciones eléctricas alineadas a la Norma Oficial Mexicana. Proyectos, memorias de cálculo y verificación UVIE para certificación eléctrica.';
+---
+
+<Layout lang={lang} title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Verificación UVIE y cumplimiento de normativa eléctrica
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Instalaciones eléctricas alineadas a la Norma Oficial Mexicana.
+          </p>
+          <a 
+            href={`https://wa.me/${settings?.whatsappNumber}`}
+            target="_blank"
+            class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+          >
+            Solicitar revisión eléctrica
+          </a>
+        </div>
+        <div class="rounded-lg overflow-hidden shadow-xl">
+          <img 
+            src="/services/uvie.jpeg" 
+            alt="Verificación UVIE y cumplimiento NOM"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es la verificación UVIE -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Qué es la verificación UVIE</h2>
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <p class="text-lg leading-relaxed mb-6">
+          La verificación UVIE (Unidad de Verificación de Instalaciones Eléctricas) es un proceso obligatorio en México para certificar que las instalaciones eléctricas cumplen con las Normas Oficiales Mexicanas, específicamente la NOM-001-SEDE.
+        </p>
+        <p class="text-lg leading-relaxed mb-6">
+          Este dictamen es requisito indispensable para la conexión del suministro eléctrico por parte de CFE y garantiza que la instalación ha sido diseñada, ejecutada y probada conforme a los estándares de seguridad eléctrica vigentes.
+        </p>
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
+          <p class="text-gray-700 font-medium">
+            Trabajamos con Unidades de Verificación autorizadas ante la EMA (Entidad Mexicana de Acreditación) para garantizar dictámenes válidos y reconocidos por CFE.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué entregamos -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Qué entregamos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Proyecto eléctrico ejecutivo</h3>
+          <p class="text-gray-600">
+            Documentación técnica completa de la instalación eléctrica: planos arquitectónicos con distribución eléctrica, diagramas unifilares, cuadros de cargas y especificaciones.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Memoria de cálculo</h3>
+          <p class="text-gray-600">
+            Cálculos detallados de: demandas de carga, caídas de tensión, calibres de conductores, capacidades de protecciones, niveles de cortocircuito y diseño de tierras físicas.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Dictamen de verificación UVIE</h3>
+          <p class="text-gray-600">
+            Certificado oficial emitido por Unidad de Verificación acreditada, validando el cumplimiento de NOM-001-SEDE y aceptado por CFE.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Protocolos de pruebas</h3>
+          <p class="text-gray-600">
+            Resultados documentados de: medición de resistencia de aislamiento, continuidad de conductores, resistividad de tierras y operación de protecciones.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Bitácora de obra</h3>
+          <p class="text-gray-600">
+            Registro fotográfico y documental del proceso de instalación, supervisión y verificaciones realizadas durante la ejecución del proyecto.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Manual de operación y mantenimiento</h3>
+          <p class="text-gray-600">
+            Guía técnica para el usuario final con recomendaciones de operación, mantenimiento preventivo y directorio de equipos instalados.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso de verificación -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Proceso de verificación</h2>
+      <div class="space-y-6">
+        {[
+          {
+            step: '1',
+            title: 'Levantamiento y análisis',
+            description: 'Visita al sitio para evaluar las condiciones de la instalación eléctrica existente o en proyecto. Recopilación de información técnica y definición de alcances.'
+          },
+          {
+            step: '2',
+            title: 'Desarrollo de ingeniería',
+            description: 'Elaboración de proyecto ejecutivo, diagramas unifilares, memorias de cálculo y especificaciones técnicas conforme a NOM-001-SEDE y especificaciones CFE.'
+          },
+          {
+            step: '3',
+            title: 'Supervisión de instalación',
+            description: 'Acompañamiento técnico durante la ejecución de obras eléctricas, verificando que la instalación se realice según proyecto y normativa aplicable.'
+          },
+          {
+            step: '4',
+            title: 'Pruebas y mediciones',
+            description: 'Realización de pruebas eléctricas con equipos calibrados: resistencia de aislamiento, continuidad, resistividad de tierra, balance de cargas y operación de protecciones.'
+          },
+          {
+            step: '5',
+            title: 'Coordinación UVIE',
+            description: 'Gestión con Unidad de Verificación acreditada para inspección final y emisión de dictamen de cumplimiento normativo.'
+          },
+          {
+            step: '6',
+            title: 'Entrega de documentación',
+            description: 'Entrega del paquete documental completo: proyecto, memorias, dictamen UVIE, protocolos de prueba y manual de operación.'
+          }
+        ].map((phase) => (
+          <div class="flex gap-6 items-start">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+              {phase.step}
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{phase.title}</h3>
+              <p class="text-gray-600">{phase.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Errores comunes que evitamos -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Errores comunes que evitamos</h2>
+      <div class="prose prose-lg max-w-none text-gray-600 mb-8">
+        <p class="text-lg leading-relaxed">
+          Muchos proyectos enfrentan retrasos en la obtención del dictamen UVIE por deficiencias técnicas o documentales. Nuestro enfoque preventivo garantiza una verificación exitosa en el primer intento:
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          {
+            error: 'Conductores subdimensionados',
+            solution: 'Cálculo correcto de calibres considerando caída de tensión y capacidad de corriente.'
+          },
+          {
+            error: 'Sistema de tierras deficiente',
+            solution: 'Diseño de red de tierras físicas con valores de resistividad dentro de norma.'
+          },
+          {
+            error: 'Protecciones mal coordinadas',
+            solution: 'Selección y ajuste de protecciones con estudios de coordinación y selectividad.'
+          },
+          {
+            error: 'Falta de documentación técnica',
+            solution: 'Elaboración completa de proyectos, memorias y planos conforme a requerimientos.'
+          },
+          {
+            error: 'Incumplimiento de distancias de seguridad',
+            solution: 'Respeto a distancias mínimas entre instalaciones y elementos constructivos.'
+          },
+          {
+            error: 'Ausencia de protocolos de prueba',
+            solution: 'Realización y documentación de todas las pruebas eléctricas requeridas.'
+          }
+        ].map((item) => (
+          <div class="bg-white p-6 rounded-lg border-l-4 border-red-500">
+            <div class="flex items-start gap-3 mb-3">
+              <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              <p class="font-bold text-gray-900">{item.error}</p>
+            </div>
+            <div class="flex items-start gap-3 pl-8">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-gray-600">{item.solution}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        ¿Necesitas verificar tu instalación eléctrica?
+      </h2>
+      <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+        Obtén tu dictamen UVIE con un proceso garantizado. Te acompañamos desde el proyecto hasta la certificación final.
+      </p>
+      <a 
+        href={`https://wa.me/${settings?.whatsappNumber}`}
+        target="_blank"
+        class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+      >
+        Contactar por WhatsApp
+      </a>
+    </div>
+  </section>
+</Layout>

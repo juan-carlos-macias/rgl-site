@@ -1,0 +1,46 @@
+---
+const { lang = "en" } = Astro.props;
+
+const titles = {
+  en: "Companies that have trusted RLG",
+  es: "Empresas que han confiado en RLG",
+};
+
+const title = titles[lang as keyof typeof titles] || titles.en;
+
+const partners = [
+  { name: "AS", logo: "/logos/as-logo.png" },
+  { name: "EU", logo: "/logos/eu-logo.png" },
+  { name: "General Electric", logo: "/logos/generalelectric-logo.png" },
+  { name: "Geodis", logo: "/logos/Geodis-Logo_NEW_138x51px_BLUE 1.svg" },
+  { name: "Hyundai", logo: "/logos/huinday-logo.jpeg" },
+  { name: "Koch", logo: "/logos/koch-logo.svg" },
+  { name: "Sophia", logo: "/logos/logo-sophia.png" },
+  { name: "Tajin", logo: "/logos/logotipo-tajin.png" },
+  { name: "Schedia", logo: "/logos/schedia_logo.jpeg" },
+  { name: "STAK", logo: "/logos/STAK_LogoN.avif" },
+];
+---
+
+<section class="bg-white pt-24 pb-20 md:pt-24 md:pb-24">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <h2 class="text-center text-[0.6rem] md:text-[0.75rem] uppercase tracking-[0.08em] text-gray-600 font-semibold mb-14">
+      {title}
+    </h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10 md:gap-x-12 md:gap-y-12 items-center justify-items-center">
+      {
+        partners.map((partner) => (
+          <div class="flex items-center justify-center w-full h-9 md:h-10">
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              class="max-h-full max-w-full object-contain grayscale opacity-65 mix-blend-multiply"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

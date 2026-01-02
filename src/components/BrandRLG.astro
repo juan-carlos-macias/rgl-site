@@ -1,0 +1,175 @@
+---
+type Props = {
+  href?: string;
+  label?: string;
+  scale?: number; // 1 = tamaño base, 0.9 más chico, 1.1 más grande
+};
+
+const {
+  href = "/",
+  label = "RLG — Electrical Building",
+  scale = 1,
+} = Astro.props;
+---
+
+<a class="rlg" href={href} aria-label={label} style={`--s:${scale};`}>
+  <span class="rlg__top" aria-hidden="true">
+    <span class="rlg__text">RLG</span>
+
+    <span class="rlg__mark">
+      <span class="rlg__h"></span>
+      <span class="rlg__bars">
+        <span class="rlg__bar rlg__bar--1"></span>
+        <span class="rlg__bar rlg__bar--2"></span>
+        <span class="rlg__bar rlg__bar--3"></span>
+      </span>
+      <span class="rlg__dot"></span>
+    </span>
+  </span>
+
+  <span class="rlg__subtitle">
+    <span class="rlg__ampersand">&</span>
+    <span class="rlg__more">MORE</span>
+  </span>
+
+  <span class="rlg__rule" aria-hidden="true"></span>
+
+  <span class="rlg__tag">ELECTRICAL BUILDING</span>
+</a>
+
+<style>
+  /* Colores ajustados a tu imagen */
+  .rlg{
+    --blue:#355D6E;
+    --green:#6E8F2B;
+    --red:#8C2D2D;
+
+    /* Escala general */
+    --s: 1;
+
+    /* Tipografía (casi idéntica a tu ejemplo) */
+    font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+    display:inline-flex;
+    flex-direction:column;
+    gap: 0;
+    text-decoration:none;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Accesibilidad: focus visible */
+  .rlg:focus-visible{
+    outline: 3px solid color-mix(in srgb, var(--blue) 70%, white);
+    outline-offset: 6px;
+    border-radius: 10px;
+  }
+
+  .rlg__top{
+    display:inline-flex;
+    align-items:center;
+    gap: 0;
+    line-height:1;
+  }
+
+  /* RLG grande */
+  .rlg__text{
+    color: var(--blue);
+    font-weight: 300;
+    font-size: calc(96px * var(--s));
+    letter-spacing: 0.25em;
+  }
+
+  /* Marca verde a la derecha de la G */
+  .rlg__mark{
+    display:inline-flex;
+    align-items:center;
+    gap: 0;
+    /* baja un poco para alinearse con la mitad de la "G" y mueve a la izquierda para superponerse sobre el palo horizontal de la G */
+    transform: translateY(calc(6px * var(--s))) translateX(calc(-62px * var(--s)));
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Barra horizontal verde (la línea que "entra" hacia las barras) */
+  .rlg__h{
+    width: calc(46px * var(--s));
+    height: calc(10px * var(--s));
+    background: var(--green);
+    border-radius: calc(6px * var(--s));
+    position: relative;
+    z-index: 3;
+  }
+
+  .rlg__bars{
+    display:inline-flex;
+    align-items:center;
+    gap: calc(6px * var(--s));
+  }
+
+  .rlg__bar{
+    width: calc(10px * var(--s));
+    background: var(--green);
+    border-radius: calc(6px * var(--s));
+    position: relative;
+    z-index: 1;
+  }
+  .rlg__bar--1{ height: calc(62px * var(--s)); }
+  .rlg__bar--2{ height: calc(48px * var(--s)); }
+  .rlg__bar--3{ height: calc(34px * var(--s)); }
+
+  /* Puntito verde al final */
+  .rlg__dot{
+    width: calc(10px * var(--s));
+    height: calc(10px * var(--s));
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: calc(6px * var(--s));
+  }
+
+  /* Línea azul debajo */
+  .rlg__rule{
+    height: calc(4px * var(--s));
+    width: 84%;
+    background: var(--blue);
+  }
+
+  /* & MORE */
+  .rlg__subtitle{
+    color: var(--blue);
+    font-weight: 300;
+    font-size: calc(42px * var(--s));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: calc(-20px * var(--s));
+    align-self: flex-start;
+    display: flex;
+    gap: 0;
+  }
+
+  .rlg__ampersand{
+    display: inline-block;
+  }
+
+  .rlg__more{
+    display: inline-block;
+    margin-left: calc(50px * var(--s));
+    letter-spacing: 0.70em;
+  }
+
+  /* ELECTRICAL BUILDING */
+  .rlg__tag{
+    color: var(--red);
+    font-weight: 600;
+    font-size: calc(22px * var(--s));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: calc(8px * var(--s));
+    white-space: nowrap;
+  }
+
+  /* Responsivo: si lo metes en header, esto evita que explote en móvil */
+  @media (max-width: 520px){
+    .rlg{ --s: .72; }
+  }
+</style>

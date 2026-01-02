@@ -1,0 +1,57 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/sections/Hero.astro';
+import TrustBlock from '@components/sections/TrustBlock.astro';
+import PartnersBlock from '@components/sections/PartnersBlock.astro';
+import ServicesGrid from '@components/sections/ServicesGrid.astro';
+import Coverage from '@components/sections/Coverage.astro';
+import CTAForm from '@components/sections/CTAForm.astro';
+import { client } from '@lib/sanity/client';
+import { 
+  SITE_SETTINGS_QUERY
+} from '@lib/sanity/queries';
+
+const lang = 'en';
+
+const settings = await client.fetch(SITE_SETTINGS_QUERY);
+
+// Default content for Hero if not in Sanity yet
+const heroData = {
+  title: {
+    es: 'Ingeniería Eléctrica y Construcción de Alto Nivel',
+    en: 'High-Level Electrical Engineering and Construction'
+  },
+  subtitle: {
+    es: 'Especialistas en Media y Baja Tensión, gestión ante CFE y mantenimiento industrial en CDMX, Querétaro y Guadalajara.',
+    en: 'Specialists in Medium and Low Voltage, CFE management, and industrial maintenance in CDMX, Queretaro, and Guadalajara.'
+  },
+  ctaPrimary: {
+    es: 'Solicitar cotización',
+    en: 'Request a quote'
+  },
+  ctaSecondary: {
+    es: 'Agendar visita',
+    en: 'Schedule visit'
+  }
+};
+---
+
+<Layout lang={lang}>
+  <Hero 
+    title={heroData.title}
+    subtitle={heroData.subtitle}
+    ctaPrimary={heroData.ctaPrimary}
+    ctaSecondary={heroData.ctaSecondary}
+    images={settings?.heroImages}
+    lang={lang}
+  />
+  
+  <TrustBlock lang={lang} />
+  <PartnersBlock lang={lang} />
+  
+  <ServicesGrid lang={lang} />
+  
+  <Coverage lang={lang} />
+  
+  <CTAForm settings={settings} lang={lang} />
+</Layout>

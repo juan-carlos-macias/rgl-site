@@ -1,0 +1,44 @@
+{
+  "name": "rgl-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:astro": "astro dev",
+    "dev:sanity": "sanity dev --dir sanity",
+    "dev:all": "concurrently \"npm run dev:astro\" \"npm run dev:sanity\"",
+    "build": "astro build",
+    "build:sanity": "sanity build sanity -d dist/sanity",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sanity": "sanity"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vercel": "^9.0.2",
+    "@portabletext/react": "^3.1.0",
+    "@sanity/client": "^6.24.1",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.68.2",
+    "astro": "^5.1.1",
+    "clsx": "^2.1.1",
+    "concurrently": "^9.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.68.2",
+    "styled-components": "^6.1.13",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.10",
+    "@iconify-json/mdi": "^1.2.1",
+    "@types/node": "^25.0.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "astro-icon": "^1.1.4"
+  }
+}

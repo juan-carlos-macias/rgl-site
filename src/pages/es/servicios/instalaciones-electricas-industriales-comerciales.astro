@@ -1,0 +1,212 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { client } from '@lib/sanity/client';
+import { SITE_SETTINGS_QUERY } from '@lib/sanity/queries';
+
+const lang = 'es';
+const settings = await client.fetch(SITE_SETTINGS_QUERY);
+
+const pageTitle = 'Instalaciones eléctricas industriales y comerciales en Guadalajara | RLG Electrical';
+const pageDescription = 'Soluciones eléctricas profesionales para oficinas, naves industriales y comercios. Especialistas en instalaciones eléctricas con cumplimiento normativo NOM y CFE.';
+---
+
+<Layout lang={lang} title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Instalaciones eléctricas industriales y comerciales en Guadalajara
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Soluciones eléctricas profesionales para oficinas, naves industriales y comercios.
+          </p>
+          <a 
+            href={`https://wa.me/${settings?.whatsappNumber}`}
+            target="_blank"
+            class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+          >
+            Solicitar visita técnica
+          </a>
+        </div>
+        <div class="rounded-lg overflow-hidden shadow-xl">
+          <img 
+            src="/services/Instalaciones_electricas.jpeg" 
+            alt="Instalaciones eléctricas industriales y comerciales"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué hacemos -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Qué hacemos</h2>
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <p class="text-lg leading-relaxed mb-6">
+          Ejecutamos instalaciones eléctricas completas para proyectos industriales y comerciales, desde el diseño inicial hasta la puesta en servicio. Nuestro equipo técnico desarrolla soluciones adaptadas a las necesidades específicas de cada proyecto, garantizando eficiencia energética y cumplimiento normativo.
+        </p>
+        <p class="text-lg leading-relaxed">
+          Trabajamos en coordinación con arquitectos, ingenieros civiles y contratistas generales para integrar sistemas eléctricos que cumplan con los más altos estándares de calidad y seguridad.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipos de proyectos -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Tipos de proyectos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Oficinas corporativas</h3>
+          <p class="text-gray-600">
+            Sistemas eléctricos para edificios corporativos, oficinas ejecutivas y espacios de trabajo modernos con alta demanda tecnológica.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Naves industriales</h3>
+          <p class="text-gray-600">
+            Instalaciones eléctricas de media y baja tensión para plantas de manufactura, almacenes y centros de distribución.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Espacios comerciales</h3>
+          <p class="text-gray-600">
+            Soluciones eléctricas para centros comerciales, tiendas departamentales, restaurantes y locales comerciales.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué incluye el servicio -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Qué incluye el servicio</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          'Diseño y proyecto ejecutivo eléctrico',
+          'Distribución de circuitos y tableros eléctricos',
+          'Sistemas de iluminación interior y exterior',
+          'Instalación de contactos y tomas especializadas',
+          'Canalizaciones y sistemas de cableado estructurado',
+          'Alimentadores eléctricos principales',
+          'Instalación de subestaciones eléctricas',
+          'Pruebas y puesta en marcha',
+          'Documentación as-built y entrega de proyecto',
+          'Garantía y soporte técnico'
+        ].map((item) => (
+          <div class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700 text-lg">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso de trabajo -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Proceso de trabajo</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {[
+          {
+            step: '01',
+            title: 'Visita técnica',
+            description: 'Evaluación del sitio, levantamiento de requerimientos y análisis de cargas eléctricas.'
+          },
+          {
+            step: '02',
+            title: 'Ingeniería y diseño',
+            description: 'Desarrollo de proyecto ejecutivo, memorias de cálculo y selección de equipos.'
+          },
+          {
+            step: '03',
+            title: 'Ejecución',
+            description: 'Instalación de sistemas eléctricos con personal técnico certificado y supervisión continua.'
+          },
+          {
+            step: '04',
+            title: 'Entrega y garantía',
+            description: 'Pruebas finales, capacitación al personal y entrega de documentación técnica.'
+          }
+        ].map((phase) => (
+          <div class="relative">
+            <div class="text-5xl font-bold text-blue-100 mb-4">{phase.step}</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">{phase.title}</h3>
+            <p class="text-gray-600">{phase.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cumplimiento normativo -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Cumplimiento normativo</h2>
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-8">
+        <p class="text-lg text-gray-700 mb-6">
+          Todas nuestras instalaciones cumplen rigurosamente con:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-bold text-gray-900 mb-2">NOM-001-SEDE</h4>
+            <p class="text-gray-600">Instalaciones eléctricas (utilización)</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 mb-2">CFE</h4>
+            <p class="text-gray-600">Especificaciones técnicas y normativa CFE</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 mb-2">Verificación UVIE</h4>
+            <p class="text-gray-600">Unidades de verificación autorizadas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        ¿Listo para iniciar tu proyecto eléctrico?
+      </h2>
+      <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+        Agenda una visita técnica sin costo y recibe una cotización detallada para tu proyecto.
+      </p>
+      <a 
+        href={`https://wa.me/${settings?.whatsappNumber}`}
+        target="_blank"
+        class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+      >
+        Contactar por WhatsApp
+      </a>
+    </div>
+  </section>
+</Layout>

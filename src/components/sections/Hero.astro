@@ -1,0 +1,101 @@
+---
+import { urlFor } from '@lib/sanity/image';
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  title: { es: string; en: string };
+  subtitle: { es: string; en: string };
+  ctaPrimary: { es: string; en: string };
+  ctaSecondary: { es: string; en: string };
+  images: any[];
+  lang: 'es' | 'en';
+}
+
+const { title, subtitle, ctaPrimary, ctaSecondary, images, lang } = Astro.props;
+
+// Dynamically load all images from public/images
+const imageFiles = [
+  '293716298_145469724800638_2824511224524706550_n.jpeg',
+  '451968285_497903702632654_3741815623003127600_n.jpeg',
+  '455199473_2719109121588142_1922642215626793035_n.jpeg',
+  '468692352_916556100427397_8790700002807746636_n.jpeg',
+  '469514286_2958538537631938_2838102645515793503_n.jpeg'
+];
+---
+
+<section class="relative min-h-[85vh] flex items-center pt-20 overflow-hidden bg-gray-50">
+  <div class="container-custom">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-12 items-center">
+      <!-- Left: Content -->
+      <div class="z-10 text-center lg:text-left">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+          {title[lang]}
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+          {subtitle[lang]}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <Button href={`/${lang}/contact`} size="lg" variant="primary">
+            {ctaPrimary[lang]}
+          </Button>
+          <Button href={`/${lang}/contact#visit`} size="lg" variant="outline">
+            {ctaSecondary[lang]}
+          </Button>
+        </div>
+      </div>
+
+      <!-- Right: Carousel -->
+      <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+        <div id="hero-carousel" class="relative h-full">
+          {imageFiles.map((imageName, index) => (
+            <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+              <img 
+                src={`/images/${imageName}`}
+                alt="Electrical Engineering Project" 
+                class="w-full h-full object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupCarousel() {
+    const carousel = document.getElementById('hero-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+
+    function showSlide(index: number) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('opacity-0');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.remove('opacity-100');
+          slide.classList.add('opacity-0');
+        }
+      });
+    }
+
+    // Initialize first slide
+    showSlide(0);
+
+    // Auto play with slow transition
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }, 4000); // Change image every 4 seconds
+  }
+
+  // Setup on load and after swaps
+  setupCarousel();
+  document.addEventListener('astro:after-swap', setupCarousel);
+</script>

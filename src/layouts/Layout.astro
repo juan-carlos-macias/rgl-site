@@ -1,0 +1,267 @@
+---
+import { client } from '@lib/sanity/client';
+import { SITE_SETTINGS_QUERY } from '@lib/sanity/queries';
+import type { SiteSettings } from '@lib/sanity/types';
+import BrandRLG from '@components/BrandRLG.astro';
+import '../styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: 'es' | 'en';
+}
+
+const { lang, title: propTitle, description: propDescription } = Astro.props;
+
+const settings: SiteSettings = await client.fetch(SITE_SETTINGS_QUERY);
+const seo = settings?.defaultSeo?.[lang];
+
+const title = propTitle || seo?.title || settings?.companyName;
+const description = propDescription || seo?.description;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const alternateLang = lang === 'es' ? 'en' : 'es';
+const alternatePath = Astro.url.pathname.replace(`/${lang}`, `/${alternateLang}`);
+const alternateURL = new URL(alternatePath, Astro.site);
+
+const gtmId = import.meta.env.GTM_ID;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang={lang} href={canonicalURL} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+
+    {gtmId && (
+      <script is:inline define:vars={{ gtmId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    )}
+  </head>
+  <body>
+    {gtmId && (
+      <noscript>
+        <iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    )}
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <nav class="container-custom h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="/rlg_icon.png" alt={settings?.companyName || 'RGL'} class="h-16 w-auto" />
+          <BrandRLG href={`/${lang}`} scale={0.35} />
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href={`/${lang}#servicios`} class="font-medium hover:text-blue-600">{lang === 'es' ? 'Servicios' : 'Services'}</a>
+          <a href={`/${lang}/proyectos`} class="font-medium hover:text-blue-600">{lang === 'es' ? 'Proyectos' : 'Projects'}</a>
+          <a href={`/${lang}/proceso`} class="font-medium hover:text-blue-600">{lang === 'es' ? 'Proceso' : 'Process'}</a>
+          <a href={`/${lang}/contacto`} class="font-medium hover:text-blue-600">{lang === 'es' ? 'Contacto' : 'Contact'}</a>
+          
+          <a href={alternatePath} class="px-3 py-1 bg-gray-100 rounded text-sm font-bold hover:bg-gray-200 uppercase">
+            {alternateLang}
+          </a>
+
+          <a href={`https://wa.me/${settings?.whatsappNumber}`} target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.01c6.551 0 11.89-5.335 11.893-11.892a11.826 11.826 0 00-3.376-8.412"></path></svg>
+            {lang === 'es' ? 'Agendar evaluación' : 'Schedule Evaluation'}
+          </a>
+        </div>
+        
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-button" class="lg:hidden p-2 text-gray-700 hover:text-blue-600 focus:outline-none" aria-label="Toggle menu">
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" style="backdrop-filter: blur(4px);"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden shadow-2xl">
+      <div class="flex flex-col h-full">
+        <!-- Menu Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+          <span class="text-lg font-bold text-gray-900">{lang === 'es' ? 'Menú' : 'Menu'}</span>
+          <button id="mobile-menu-close" class="p-2 text-gray-500 hover:text-gray-700" aria-label="Close menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="flex-1 overflow-y-auto py-6">
+          <ul class="space-y-1 px-4">
+            <li>
+              <a href={`/${lang}`} class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg font-medium transition-colors">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}#servicios`} class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg font-medium transition-colors">
+                {lang === 'es' ? 'Servicios' : 'Services'}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/proyectos`} class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg font-medium transition-colors">
+                {lang === 'es' ? 'Proyectos' : 'Projects'}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/proceso`} class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg font-medium transition-colors">
+                {lang === 'es' ? 'Proceso' : 'Process'}
+              </a>
+            </li>
+            <li>
+              <a href={`/${lang}/contacto`} class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg font-medium transition-colors">
+                {lang === 'es' ? 'Contacto' : 'Contact'}
+              </a>
+            </li>
+          </ul>
+
+          <!-- Language Switcher -->
+          <div class="px-4 mt-6">
+            <a href={alternatePath} class="block px-4 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-center uppercase transition-colors">
+              {alternateLang === 'es' ? 'Español' : 'English'}
+            </a>
+          </div>
+        </nav>
+
+        <!-- WhatsApp CTA -->
+        <div class="p-6 border-t border-gray-200">
+          <a href={`https://wa.me/${settings?.whatsappNumber}`} target="_blank" class="flex items-center justify-center gap-3 bg-blue-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-blue-700 transition-colors w-full">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.01c6.551 0 11.89-5.335 11.893-11.892a11.826 11.826 0 00-3.376-8.412"></path></svg>
+            <span class="text-sm">{lang === 'es' ? 'Agendar evaluación' : 'Schedule Evaluation'}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu toggle functionality
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      function openMenu() {
+        mobileMenu?.classList.remove('translate-x-full');
+        mobileMenuOverlay?.classList.remove('hidden');
+        hamburgerIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        mobileMenu?.classList.add('translate-x-full');
+        mobileMenuOverlay?.classList.add('hidden');
+        hamburgerIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      mobileMenuButton?.addEventListener('click', () => {
+        if (mobileMenu?.classList.contains('translate-x-full')) {
+          openMenu();
+        } else {
+          closeMenu();
+        }
+      });
+
+      mobileMenuClose?.addEventListener('click', closeMenu);
+      mobileMenuOverlay?.addEventListener('click', closeMenu);
+
+      // Close menu on navigation
+      const menuLinks = mobileMenu?.querySelectorAll('a');
+      menuLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+          setTimeout(closeMenu, 300);
+        });
+      });
+
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu?.classList.contains('translate-x-full')) {
+          closeMenu();
+        }
+      });
+    </script>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-gray-50 pt-20 pb-10 border-t border-gray-200">
+      <div class="container-custom">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div class="col-span-1 md:col-span-2">
+            <a href={`/${lang}`} class="text-2xl font-bold text-blue-600 mb-6 block">
+              {settings?.companyName}
+            </a>
+            <p class="text-gray-500 max-w-sm">
+              {seo?.description}
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-gray-400">{lang === 'es' ? 'Enlaces' : 'Links'}</h4>
+            <ul class="space-y-4">
+               <li><a href={`/${lang}`} class="hover:text-blue-600">Home</a></li>
+               <li><a href={`/${lang}#servicios`} class="hover:text-blue-600">{lang === 'es' ? 'Servicios' : 'Services'}</a></li>
+               <li><a href={`/${lang}/proyectos`} class="hover:text-blue-600">{lang === 'es' ? 'Proyectos' : 'Projects'}</a></li>
+               <li><a href={`/${lang}/contacto`} class="hover:text-blue-600">{lang === 'es' ? 'Contacto' : 'Contact'}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-gray-400">{lang === 'es' ? 'Legal' : 'Legal'}</h4>
+            <ul class="space-y-4">
+               <li><a href="#" class="hover:text-blue-600">{lang === 'es' ? 'Privacidad' : 'Privacy'}</a></li>
+               <li><a href="#" class="hover:text-blue-600">{lang === 'es' ? 'Términos' : 'Terms'}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-200 pt-8 flex flex-col md:row justify-between items-center gap-4 text-gray-400 text-sm">
+           <p>© {new Date().getFullYear()} {settings?.companyName}. All rights reserved.</p>
+           <div class="flex gap-6">
+              {settings?.socialLinks?.map(link => (
+                <a href={link.url} target="_blank" class="hover:text-blue-600 uppercase font-bold">{link.platform}</a>
+              ))}
+           </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp CTA (Mobile) -->
+    <a 
+      href={`https://wa.me/${settings?.whatsappNumber}`}
+      class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg md:hidden"
+      aria-label="WhatsApp"
+    >
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.01c6.551 0 11.89-5.335 11.893-11.892a11.826 11.826 0 00-3.376-8.412"></path></svg>
+    </a>
+  </body>
+</html>

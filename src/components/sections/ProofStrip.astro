@@ -1,0 +1,33 @@
+---
+import { urlFor } from '@lib/sanity/image';
+
+interface Props {
+  clients: any[];
+  lang: 'es' | 'en';
+}
+
+const { clients, lang } = Astro.props;
+
+const labels = {
+  es: 'Empresas que confían en nosotros',
+  en: 'Companies that trust us'
+};
+---
+
+<div class="py-12 bg-gray-50 border-y border-gray-100">
+  <div class="container-custom">
+    <p class="text-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-8">
+      {labels[lang]}
+    </p>
+    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+      {clients && clients.map((client) => (
+        <img 
+          src={urlFor(client.logo).height(40).url()} 
+          alt={client.name} 
+          class="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+        />
+      ))}
+      {!clients && <div class="text-gray-300 italic">Client Logos</div>}
+    </div>
+  </div>
+</div>

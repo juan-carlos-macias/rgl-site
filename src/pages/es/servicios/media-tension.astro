@@ -1,0 +1,231 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { client } from '@lib/sanity/client';
+import { SITE_SETTINGS_QUERY } from '@lib/sanity/queries';
+
+const lang = 'es';
+const settings = await client.fetch(SITE_SETTINGS_QUERY);
+
+const pageTitle = 'Instalaciones eléctricas en media tensión hasta 25 kV | RLG Electrical';
+const pageDescription = 'Especialistas en acometidas, transformadores y gestión ante CFE. Instalaciones de media tensión con cumplimiento normativo completo para proyectos industriales.';
+---
+
+<Layout lang={lang} title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Instalaciones eléctricas en media tensión hasta 25 kV
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Acometidas, transformadores y gestión ante CFE.
+          </p>
+          <a 
+            href={`https://wa.me/${settings?.whatsappNumber}`}
+            target="_blank"
+            class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+          >
+            Solicitar diagnóstico técnico
+          </a>
+        </div>
+        <div class="rounded-lg overflow-hidden shadow-xl">
+          <img 
+            src="/services/media_tension.jpeg" 
+            alt="Instalaciones de media tensión hasta 25 kV"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alcance del servicio -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Alcance del servicio</h2>
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <p class="text-lg leading-relaxed mb-6">
+          Diseñamos, instalamos y ponemos en operación sistemas eléctricos de media tensión para proyectos industriales y comerciales de alto consumo energético. Nuestro equipo especializado cuenta con la experiencia y certificaciones necesarias para trabajar con tensiones de distribución hasta 25 kV.
+        </p>
+        <p class="text-lg leading-relaxed">
+          Gestionamos el proceso completo ante CFE, desde la solicitud de factibilidad hasta la energización final, asegurando que cada instalación cumpla con las especificaciones técnicas requeridas y los más altos estándares de seguridad.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué incluye -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Qué incluye</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Acometidas eléctricas</h3>
+          <p class="text-gray-600">
+            Diseño e instalación de acometidas aéreas y subterráneas desde la red de CFE hasta el punto de entrega en la instalación del cliente.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Subestaciones eléctricas</h3>
+          <p class="text-gray-600">
+            Ingeniería, suministro e instalación de subestaciones tipo pedestal, poste y compactas con transformadores de potencia.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Equipos de protección</h3>
+          <p class="text-gray-600">
+            Instalación de equipos de seccionamiento, protección y medición conforme a especificaciones CFE.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Transiciones aéreo–subterráneas</h3>
+          <p class="text-gray-600">
+            Diseño y montaje de estructuras de transición con herrajes, aisladores y sistemas de protección atmosférica.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Banco de transformadores</h3>
+          <p class="text-gray-600">
+            Configuración e instalación de bancos de transformadores monofásicos y trifásicos según requerimientos de carga.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Estudios y cálculos</h3>
+          <p class="text-gray-600">
+            Memorias de cálculo, estudios de cortocircuito, coordinación de protecciones y análisis de demanda.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gestión con CFE -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Gestión con CFE</h2>
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-8">
+        <p class="text-lg text-gray-700 mb-8">
+          Nos encargamos de todos los trámites ante CFE para que tu proyecto avance sin demoras:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            'Solicitud de factibilidad de servicio',
+            'Elaboración de proyectos eléctricos según especificaciones CFE',
+            'Gestión de aprobación de proyectos',
+            'Coordinación de trabajos en líneas energizadas',
+            'Tramitación de convenios de servicio',
+            'Supervisión de energización',
+            'Obtención de carta de liberación CFE',
+            'Entrega de documentación técnica completa'
+          ].map((item) => (
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-gray-700">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seguridad y normativa -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Seguridad y normativa</h2>
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <p class="text-lg leading-relaxed mb-6">
+          La seguridad es prioritaria en todos nuestros proyectos de media tensión. Nuestro personal técnico cuenta con capacitación especializada y certificaciones vigentes para trabajar en instalaciones energizadas y en altura.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-gray-900 mb-3">Normativa aplicable</h4>
+            <ul class="space-y-2 text-gray-600">
+              <li>• NOM-001-SEDE</li>
+              <li>• Especificaciones CFE</li>
+              <li>• NOM-029-STPS</li>
+              <li>• ANSI/IEEE Standards</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-gray-900 mb-3">Certificaciones</h4>
+            <ul class="space-y-2 text-gray-600">
+              <li>• Personal certificado CFE</li>
+              <li>• Técnicos en altura</li>
+              <li>• Operadores de subestaciones</li>
+              <li>• Primeros auxilios</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-gray-900 mb-3">Equipamiento</h4>
+            <ul class="space-y-2 text-gray-600">
+              <li>• EPP certificado</li>
+              <li>• Herramientas aisladas</li>
+              <li>• Equipos de medición</li>
+              <li>• Sistemas de seguridad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        ¿Necesitas una instalación de media tensión?
+      </h2>
+      <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+        Contáctanos para un diagnóstico técnico y cotización detallada. Nos encargamos de todo el proceso.
+      </p>
+      <a 
+        href={`https://wa.me/${settings?.whatsappNumber}`}
+        target="_blank"
+        class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+      >
+        Contactar por WhatsApp
+      </a>
+    </div>
+  </section>
+</Layout>
