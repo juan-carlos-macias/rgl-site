@@ -4,7 +4,6 @@ import Hero from '@components/sections/Hero.astro';
 import TrustBlock from '@components/sections/TrustBlock.astro';
 import PartnersBlock from '@components/sections/PartnersBlock.astro';
 import ServicesGrid from '@components/sections/ServicesGrid.astro';
-import Coverage from '@components/sections/Coverage.astro';
 import CTAForm from '@components/sections/CTAForm.astro';
 import { client } from '@lib/sanity/client';
 import { 
@@ -50,8 +49,6 @@ const heroData = {
   <PartnersBlock lang={lang} />
   
   <ServicesGrid lang={lang} />
-  
-  <Coverage lang={lang} />
   
   <CTAForm settings={settings} lang={lang} />
 </Layout>

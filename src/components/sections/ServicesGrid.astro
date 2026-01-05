@@ -107,7 +107,7 @@ const services = [
 ];
 ---
 
-<section class="pt-16 pb-16 md:pt-20 md:pb-24 bg-white" id="servicios">
+<section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-white border-t border-gray-200" id="servicios">
   <div class="container mx-auto px-4 md:px-6 max-w-7xl">
     <!-- Section Header - Centered -->
     <div class="mb-20 md:mb-28 text-center">
@@ -144,7 +144,7 @@ const services = [
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-6">
-                <div class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl">
+                <div class="relative bg-white/95 backdrop-blur-sm p-6 shadow-bottom-only">
                   <h3 class="text-xl font-bold text-gray-900 mb-2 leading-tight">
                     {service.title[lang]}
                   </h3>
@@ -181,7 +181,7 @@ const services = [
               
               <!-- Panel (same size as image) -->
               <div class="w-1/2 flex items-center">
-                <div class="bg-white shadow-xl border border-gray-200 p-8 h-full flex flex-col justify-center">
+                <div class="relative bg-white shadow-bottom-only p-8 h-full flex flex-col justify-center">
                   <h3 class="text-2xl font-bold text-gray-900 mb-3 leading-tight">
                     {service.title[lang]}
                   </h3>
@@ -225,7 +225,7 @@ const services = [
                       
                       <!-- Panel overlapping from RIGHT -->
                       <div class="w-[52%] -ml-16 z-10">
-                        <div class="bg-white shadow-xl border border-gray-200 p-10">
+                        <div class="relative bg-white shadow-bottom-only p-10">
                           <h3 class="text-3xl font-bold text-gray-900 mb-3 leading-tight">
                             {service.title[lang]}
                           </h3>
@@ -261,7 +261,7 @@ const services = [
                       
                       <!-- Panel overlapping from LEFT -->
                       <div class="w-[52%] -mr-16 z-10">
-                        <div class="bg-white shadow-xl border border-gray-200 p-10">
+                        <div class="relative bg-white shadow-bottom-only p-10">
                           <h3 class="text-3xl font-bold text-gray-900 mb-3 leading-tight">
                             {service.title[lang]}
                           </h3>
@@ -293,6 +293,31 @@ const services = [
 </section>
 
 <style>
+  /* Shadow at top and bottom */
+  .shadow-bottom-only::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 5%;
+    right: 5%;
+    height: 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
+    filter: blur(8px);
+    z-index: -1;
+  }
+  
+  .shadow-bottom-only::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 5%;
+    right: 5%;
+    height: 12px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent);
+    filter: blur(8px);
+    z-index: -1;
+  }
+
   /* Focus styles for accessibility */
   a:focus-visible {
     outline: 3px solid #2563eb;

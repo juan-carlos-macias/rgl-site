@@ -1,5 +1,4 @@
 ---
-import { urlFor } from '@lib/sanity/image';
 import Button from '@components/ui/Button.astro';
 
 interface Props {
@@ -13,8 +12,8 @@ interface Props {
 
 const { title, subtitle, ctaPrimary, ctaSecondary, images, lang } = Astro.props;
 
-// Dynamically load all images from public/images
-const imageFiles = [
+// Real RLG project images from public/images
+const projectImages = [
   '293716298_145469724800638_2824511224524706550_n.jpeg',
   '451968285_497903702632654_3741815623003127600_n.jpeg',
   '455199473_2719109121588142_1922642215626793035_n.jpeg',
@@ -23,56 +22,83 @@ const imageFiles = [
 ];
 ---
 
-<section class="relative min-h-[85vh] flex items-center pt-20 overflow-hidden bg-gray-50">
-  <div class="container-custom">
-    <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-12 items-center">
-      <!-- Left: Content -->
-      <div class="z-10 text-center lg:text-left">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-          {title[lang]}
-        </h1>
-        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-          {subtitle[lang]}
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <Button href={`/${lang}/contact`} size="lg" variant="primary">
-            {ctaPrimary[lang]}
-          </Button>
-          <Button href={`/${lang}/contact#visit`} size="lg" variant="outline">
-            {ctaSecondary[lang]}
-          </Button>
-        </div>
+<!-- Premium Editorial Hero with Background Image Slider -->
+<section class="relative h-screen flex items-center overflow-hidden">
+  
+  <!-- Background Image Slider (Images Only) -->
+  <div id="hero-slider" class="absolute inset-0 z-0">
+    {projectImages.map((imageName, index) => (
+      <div 
+        class="slider-image absolute inset-0 opacity-0 transition-opacity duration-[2000ms] ease-in-out"
+        data-slide={index}
+      >
+        <img 
+          src={`/images/${imageName}`}
+          alt={`RLG Electrical Engineering Project ${index + 1}`}
+          class="w-full h-full object-cover"
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding={index === 0 ? "sync" : "async"}
+        />
       </div>
+    ))}
+  </div>
 
-      <!-- Right: Carousel -->
-      <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-        <div id="hero-carousel" class="relative h-full">
-          {imageFiles.map((imageName, index) => (
-            <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-              <img 
-                src={`/images/${imageName}`}
-                alt="Electrical Engineering Project" 
-                class="w-full h-full object-cover"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </div>
-          ))}
-        </div>
+  <!-- Dark Overlay for Text Contrast -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 z-10"></div>
+
+  <!-- Fixed Hero Content (Text & CTA - Does NOT Move) -->
+  <div class="container-custom relative z-20">
+    <div class="max-w-4xl mx-auto lg:mx-0 text-center lg:text-left py-20">
+      
+      <!-- H1 Title (Fixed) -->
+      <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
+        {title[lang]}
+      </h1>
+      
+      <!-- Subtitle (Fixed) -->
+      <p class="text-lg md:text-xl lg:text-2xl text-gray-100 mb-10 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+        {subtitle[lang]}
+      </p>
+      
+      <!-- CTAs (Fixed) -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <Button href={`/${lang}/contact`} size="lg" variant="primary">
+          {ctaPrimary[lang]}
+        </Button>
+        <Button href={`/${lang}/contact#visit`} size="lg" variant="outline">
+          {ctaSecondary[lang]}
+        </Button>
       </div>
+      
     </div>
   </div>
+
 </section>
 
-<script>
-  function setupCarousel() {
-    const carousel = document.getElementById('hero-carousel');
-    if (!carousel) return;
+<style>
+  /* Ensure smooth transitions without layout shift */
+  .slider-image {
+    will-change: opacity;
+  }
+  
+  /* Prevent any flickering */
+  #hero-slider {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+</style>
 
-    const slides = carousel.querySelectorAll('.carousel-slide');
+<script>
+  function initHeroSlider() {
+    const slider = document.getElementById('hero-slider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.slider-image');
     if (slides.length === 0) return;
 
     let currentIndex = 0;
 
+    // Function to show specific slide with fade transition
     function showSlide(index: number) {
       slides.forEach((slide, i) => {
         if (i === index) {
@@ -85,17 +111,19 @@ const imageFiles = [
       });
     }
 
-    // Initialize first slide
+    // Initialize: show first slide immediately
     showSlide(0);
 
-    // Auto play with slow transition
+    // Autoplay: change image every 12 seconds (middle of 10-15s range)
     setInterval(() => {
       currentIndex = (currentIndex + 1) % slides.length;
       showSlide(currentIndex);
-    }, 4000); // Change image every 4 seconds
+    }, 12000);
   }
 
-  // Setup on load and after swaps
-  setupCarousel();
-  document.addEventListener('astro:after-swap', setupCarousel);
+  // Initialize on page load
+  initHeroSlider();
+  
+  // Re-initialize after Astro view transitions
+  document.addEventListener('astro:after-swap', initHeroSlider);
 </script>

@@ -43,6 +43,11 @@ const {
     --blue:#355D6E;
     --green:#6E8F2B;
     --red:#8C2D2D;
+    
+    /* Colores dinámicos para navbar (se aplican cuando están definidos) */
+    --blue-dynamic: var(--blue);
+    --green-dynamic: var(--green);
+    --red-dynamic: var(--red);
 
     /* Escala general */
     --s: 1;
@@ -74,10 +79,11 @@ const {
 
   /* RLG grande */
   .rlg__text{
-    color: var(--blue);
+    color: var(--blue-dynamic);
     font-weight: 300;
     font-size: calc(96px * var(--s));
     letter-spacing: 0.25em;
+    transition: color 300ms ease;
   }
 
   /* Marca verde a la derecha de la G */
@@ -95,10 +101,11 @@ const {
   .rlg__h{
     width: calc(46px * var(--s));
     height: calc(10px * var(--s));
-    background: var(--green);
+    background: var(--green-dynamic);
     border-radius: calc(6px * var(--s));
     position: relative;
     z-index: 3;
+    transition: background 300ms ease;
   }
 
   .rlg__bars{
@@ -109,10 +116,11 @@ const {
 
   .rlg__bar{
     width: calc(10px * var(--s));
-    background: var(--green);
+    background: var(--green-dynamic);
     border-radius: calc(6px * var(--s));
     position: relative;
     z-index: 1;
+    transition: background 300ms ease;
   }
   .rlg__bar--1{ height: calc(62px * var(--s)); }
   .rlg__bar--2{ height: calc(48px * var(--s)); }
@@ -122,21 +130,23 @@ const {
   .rlg__dot{
     width: calc(10px * var(--s));
     height: calc(10px * var(--s));
-    background: var(--green);
+    background: var(--green-dynamic);
     border-radius: 50%;
     margin-left: calc(6px * var(--s));
+    transition: background 300ms ease;
   }
 
   /* Línea azul debajo */
   .rlg__rule{
     height: calc(4px * var(--s));
-    width: 84%;
-    background: var(--blue);
+    width: calc(290px * var(--s));
+    background: var(--blue-dynamic);
+    transition: background 300ms ease;
   }
 
   /* & MORE */
   .rlg__subtitle{
-    color: var(--blue);
+    color: var(--blue-dynamic);
     font-weight: 300;
     font-size: calc(42px * var(--s));
     letter-spacing: 0.08em;
@@ -145,6 +155,7 @@ const {
     align-self: flex-start;
     display: flex;
     gap: 0;
+    transition: color 300ms ease;
   }
 
   .rlg__ampersand{
@@ -159,13 +170,14 @@ const {
 
   /* ELECTRICAL BUILDING */
   .rlg__tag{
-    color: var(--red);
+    color: var(--red-dynamic);
     font-weight: 600;
     font-size: calc(22px * var(--s));
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-top: calc(8px * var(--s));
     white-space: nowrap;
+    transition: color 300ms ease;
   }
 
   /* Responsivo: si lo metes en header, esto evita que explote en móvil */
